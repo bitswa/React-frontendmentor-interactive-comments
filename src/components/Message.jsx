@@ -1,8 +1,8 @@
 export function Message({ data }) {
   const { image, username } = data.user;
   return (
-    <div>
-      <div>
+    <div className="p-2">
+      <div className="flex items-center">
         <div>
           <img src={image.png} alt="" />
         </div>
@@ -13,7 +13,7 @@ export function Message({ data }) {
         <span>{data?.createdAt}</span>
       </div>
       <div>{data?.content}</div>
-      <div>
+      <div className="flex justify-between items-center">
         <div>
           <button>+</button>
           {data?.score}
@@ -21,19 +21,19 @@ export function Message({ data }) {
         </div>
         {username != "juliusomo" ? (
           <div>
-            <button>
-              <img src="" alt="" />
+            <button className="flex items-center">
+              <img className="px-1" src="./images/icon-reply.svg" alt="" />
               Reply
             </button>
           </div>
         ) : (
-          <div>
-            <button>
-              <img src="" alt="" />
+          <div className="flex gap-2">
+            <button className="flex items-center">
+              <img className="px-1" src="./images/icon-delete.svg" alt="" />
               Delete
             </button>
-            <button>
-              <img src="" alt="" />
+            <button className="flex items-center">
+              <img className="px-1" src="./images/icon-edit.svg" alt="" />
               Edit
             </button>
           </div>

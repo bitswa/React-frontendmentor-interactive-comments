@@ -24,7 +24,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="p-2">
       {comments?.map((comment) => {
         return <Message key={comment.id} data={comment} />;
       })}
@@ -35,13 +35,15 @@ function App() {
         }}
       >
         <input
+          className="w-full p-2"
+          placeholder="Add a comment..."
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <div>
+        <div className="flex justify-between items-center">
           <img src="./images/avatars/image-juliusomo.png" alt="avatar" />
-          <button type="submit">SEND</button>
+          <button className="p-4 bg-blue-500 text-white rounded-lg" type="submit" >SEND</button>
         </div>
       </form>
     </div>
