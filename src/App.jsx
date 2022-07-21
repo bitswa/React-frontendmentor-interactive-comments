@@ -29,15 +29,11 @@ function App() {
     setComments(newData);
   };
 
-  const handleScore = (e, data) => {
-    const target = e.target.alt;
-
+  const handleScore = (target, data) => {
     comments.map((comment) => {
       if (comment.id != data.id) return;
 
-      if (target == "icon-plus") {
-        return ++comment.score;
-      }
+      if (target) return ++comment.score;
 
       return --comment.score;
     });

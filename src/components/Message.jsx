@@ -7,7 +7,7 @@ export function Message({ data, handleScore, handleDelete }) {
           <img className="w-8" src={image.png} alt="user image" />
         </div>
         <div>
-          <span className="px-2 font-medium">{username}</span>
+          <span className="px-3 font-medium">{username}</span>
           {username == "juliosomo" && <span>you</span>}
         </div>
         <span>{data?.createdAt}</span>
@@ -15,11 +15,11 @@ export function Message({ data, handleScore, handleDelete }) {
       <div className="py-4">{data?.content}</div>
       <div className="flex justify-between items-center pt-2">
         <div className="rounded-lg border flex items-center">
-          <button className="px-2" id="plus" onClick={(e) => handleScore(e, data)}>
+          <button className="px-3"  onClick={() => handleScore(true, data)}>
             <img src="./images/icon-plus.svg" alt="icon-plus" />
           </button>
-          <span className="px-2 p-1 border-x font-medium">{data?.score}</span>
-          <button className="px-2" id="minor" onClick={(e) => handleScore(e, data)}>
+          <span className="px-3 p-1 font-medium">{data?.score}</span>
+          <button className="px-3"  onClick={() => handleScore(false, data)}>
             <img src="./images/icon-minus.svg" alt="icon-minus" />
           </button>
         </div>
