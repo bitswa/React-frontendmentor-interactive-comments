@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Message } from "./components/Message";
 import data from "./data.json";
 
@@ -13,6 +13,7 @@ function App() {
       ...oldComments,
       {
         id: comments.length + 1,
+        createdAt: "Now",
         content: message,
         score: 0,
         user: {
@@ -28,21 +29,30 @@ function App() {
     setComments(newData);
   };
 
-  const handleScore = (data) => {
-    const newData = comments.map(comment => {
-      if (comment.id == data.id) {
-        comment.score++
+  const handleScore = (e, data) => {
+    const target = e.target.alt;
+
+    comments.map((comment) => {
+      if (comment.id != data.id) return;
+
+      if (target == "icon-plus") {
+        return ++comment.score;
       }
-    })
-    setComments(newData)
+
+      return --comment.score;
+    });
+    setComments([...comments]);
   };
 
+  useEffect(() => {
+    console.log(comments);
+  }, [comments]);
+
   return (
-    <div className="p-3 overflow-scroll">
+    <div className="p-3">
       {comments?.map((comment) => {
         return (
           <Message
-            key={comment.id}
             handleScore={handleScore}
             handleDelete={handleDelete}
             data={comment}
@@ -57,7 +67,7 @@ function App() {
         }}
       >
         <input
-          className="w-full p-2 rounded-lg border h-16"
+          className="w-full p-2 px-4 rounded-lg border h-16"
           placeholder="Add a comment..."
           type="text"
           value={message}
