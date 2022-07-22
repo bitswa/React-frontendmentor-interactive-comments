@@ -45,14 +45,20 @@ function App() {
   }, [comments]);
 
   return (
-    <div className="p-3">
+    <div className="p-3 h-full">
       {comments?.map((comment) => {
         return (
-          <Message
-            handleScore={handleScore}
-            handleDelete={handleDelete}
-            data={comment}
-          />
+          <>
+            <Message
+              key={comment.id}
+              handleScore={handleScore}
+              handleDelete={handleDelete}
+              data={comment}
+            />
+            {comment?.replies?.map((reply) => {
+              return <Message key={reply.id} handleDelete={handleDelete} handleScore={handleScore} data={reply} />;
+            })}
+          </>
         );
       })}
       <form
