@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Message } from "./components/Message";
 import data from "./data.json";
 
-function App() {
+export function App() {
   const { image, username } = data.currentUser;
 
   const [message, setMessage] = useState("");
@@ -48,17 +48,12 @@ function App() {
     <div className="p-3 h-full">
       {comments?.map((comment) => {
         return (
-          <>
-            <Message
-              key={comment.id}
-              handleScore={handleScore}
-              handleDelete={handleDelete}
-              data={comment}
-            />
-            {comment?.replies?.map((reply) => {
-              return <Message key={reply.id} handleDelete={handleDelete} handleScore={handleScore} data={reply} />;
-            })}
-          </>
+          <Message
+            key={comment.id}
+            handleScore={handleScore}
+            handleDelete={handleDelete}
+            data={comment}
+          />
         );
       })}
       <form
@@ -92,5 +87,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

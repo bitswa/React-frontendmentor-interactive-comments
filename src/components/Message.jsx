@@ -1,7 +1,13 @@
+import { useState } from "react";
+import { DeleteAlert } from "./DeleteAlert";
+
 export function Message({ data, handleScore, handleDelete }) {
   const { image, username } = data.user;
+
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <>
+    <div>
       <div className="p-3 border">
         <div className="flex items-center">
           <div>
@@ -40,9 +46,16 @@ export function Message({ data, handleScore, handleDelete }) {
             </div>
           ) : (
             <div className="flex gap-2">
+              {showModal && (
+                <DeleteAlert
+                  data={data}
+                  setShowModal={setShowModal}
+                  handleDelete={handleDelete}
+                />
+              )}
               <button
                 className="flex items-center"
-                onClick={() => handleDelete(data)}
+                onClick={() => setShowModal(true)}
               >
                 <img
                   className="px-2"
@@ -63,6 +76,16 @@ export function Message({ data, handleScore, handleDelete }) {
           )}
         </div>
       </div>
-    </>
+      {data?.replies?.map((reply) => {
+        return (
+          <Message
+            key={reply.id}
+            handleDelete={handleDelete}
+            handleScore={handleScore}
+            data={reply}
+          />
+        );
+      })}
+    </div>
   );
 }
