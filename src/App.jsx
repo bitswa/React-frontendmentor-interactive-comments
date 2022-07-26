@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Message } from "./components/Message";
 import data from "./data.json";
 
@@ -40,20 +40,30 @@ export function App() {
     setComments([...comments]);
   };
 
-  useEffect(() => {
-    console.log(comments);
-  }, [comments]);
-
   return (
     <div className="p-3 h-full">
       {comments?.map((comment) => {
         return (
-          <Message
-            key={comment.id}
-            handleScore={handleScore}
-            handleDelete={handleDelete}
-            data={comment}
-          />
+          <>
+            <Message
+              key={comment.id}
+              className={"p-3"}
+              handleScore={handleScore}
+              handleDelete={handleDelete}
+              data={comment}
+            />
+            {comment?.replies?.map((reply) => {
+              return (
+                <Message
+                  key={reply.id}
+                  className={"p-3 border-l"}
+                  handleDelete={handleDelete}
+                  handleScore={handleScore}
+                  data={reply}
+                />
+              );
+            })}
+          </>
         );
       })}
       <form
@@ -77,7 +87,7 @@ export function App() {
             alt="avatar-image"
           />
           <button
-            className="px-6 py-3 bg-blue-500 text-white rounded-lg"
+            className="px-6 py-3 bg-mBlue text-white rounded-lg"
             type="submit"
           >
             SEND
